@@ -5,22 +5,26 @@
     try {
     	
     	if(isset($_POST["enviar"])){
-        $login = 'Angelo';//$_POST["login"];
-        $senha = '123';//$_POST["senha"]; 
-        echo $login;
-
-        $consulta = $pdo->prepare("SELECT login FROM usuarios where login = :login");
-        $consulta->bindValue(':login', 123, PDO::PARAM_INT);
-        $consulta->execute();
-        $login_bd = $consulta->fetch(PDO::FETCH_ASSOC);
-         
-       // echo "login=".$login_bd;
+        $login = $_POST["login"];
+        $senha = $_POST["senha"];
     	}
 
+        $stmt = $PDO->prepare('SELECT login, senha FROM usuarios where login = :login AND senha = :senha');
+         $stmt->execute(array(
+             ':login' => $login,
+             ':senha' => $senha
+         )
+         ); 		
+         $consulta = $stmt->fetch(PDO::FETCH_ASSOC);
+         if($consulta['login'] != $login && $consulta['senha'] != $senha){
+            echo "<center> Login ou Senha incorretos!</center";
+         }else{
+            echo "<center> Bem-Vindo </center";
+         }
 	} catch(PDOException $e) {
 	  echo 'Error: ' . $e->getMessage();
 	}
 
-   
+
 ?>
 
