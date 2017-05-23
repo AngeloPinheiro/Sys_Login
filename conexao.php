@@ -1,7 +1,7 @@
 <?php 
 	define( 'MYSQL_HOST', 'localhost' );
 	define( 'MYSQL_USER', 'root' );
-	define( 'MYSQL_PASSWORD', 'kyuss' );
+	define( 'MYSQL_PASSWORD', '' );
 	define( 'MYSQL_DB_NAME', 'sistema' );
 	try
 	{
@@ -12,5 +12,5 @@
 	{
 	    echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
 	}
-	$PDO -> exec("set names utf8");  
+	$PDO -> exec("set names utf8");
 ?>
